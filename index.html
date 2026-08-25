@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#0b0d0c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Operator 2.0">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="./icon-180.png">
+  <title>Operator 2.0</title>
+  <style>
+    :root{--bg:#0b0d0c;--panel:#151816;--panel2:#1c201d;--line:#2b312d;--text:#f4f6f4;--muted:#9ca69f;--accent:#d8dfd9}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;min-height:100%}
+    body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);overscroll-behavior:none}
+    .wrap{max-width:760px;margin:0 auto;padding:18px 14px 30px}
+    .eyebrow{font-size:12px;letter-spacing:.18em;color:var(--muted);font-weight:800}
+    h1{font-size:34px;line-height:1;margin:5px 0 5px;letter-spacing:-.04em}
+    .sub{color:var(--muted);font-size:14px;margin-bottom:18px}
+    .controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:sticky;top:calc(env(safe-area-inset-top) + 8px);z-index:5;background:linear-gradient(var(--bg) 75%,transparent);padding-bottom:12px}
+    button,select{appearance:none;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:15px;min-height:48px;padding:11px 12px;font-size:15px;font-weight:750}
+    button:active{transform:scale(.985)}
+    .primary{grid-column:1/-1;background:var(--accent);color:#0a0b0a;border:none;font-size:17px;font-weight:900;min-height:56px}
+    .grid{display:grid;gap:10px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .cluster{font-size:12px;letter-spacing:.12em;color:var(--muted);font-weight:900}
+    .choice{font-size:22px;font-weight:900;letter-spacing:-.02em;margin-top:9px}
+    .family{font-size:14px;color:#c7cec9;margin-top:4px}
+    .range{font-size:14px;font-weight:850;margin-top:10px}
+    .reroll{min-height:36px;padding:6px 10px;font-size:13px;border-radius:11px}
+    .fixed{margin-top:12px;border:2px solid #4d574f;background:#101310}
+    .fixed .choice{font-size:21px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+    .chip{font-size:12px;color:#c9d0cb;background:#202521;padding:6px 9px;border-radius:999px;border:1px solid #303831}
+    details{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+    summary{font-weight:850;cursor:pointer}
+    .rules{color:#cbd1cd;font-size:14px;line-height:1.5;padding-left:18px}
+    .history{margin-top:10px;display:grid;gap:8px}
+    .history-item{background:#111412;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13px;color:#cbd1cd}
+    .footer{font-size:12px;color:var(--muted);margin-top:18px;text-align:center}
+    @media(min-width:700px){.grid{grid-template-columns:1fr 1fr}.fixed{grid-column:1/-1}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">PROJECT OPERATOR</div>
+  <h1>Operator 2.0</h1>
+  <div class="sub">Morning Matrix · kroppsvikt · ringar · pull-up-stång</div>
+
+  <div class="controls">
+    <button class="primary" id="generateBtn">GENERATE TODAY'S OPERATOR</button>
+    <select id="mode" aria-label="Antal varv">
+      <option value="3">Normal · 3 varv</option>
+      <option value="2">Reduced · 2 varv</option>
+      <option value="1">Minimum · 1 varv</option>
+    </select>
+    <button id="columnBtn">Slumpa hel kolumn</button>
+  </div>
+
+  <div id="grid" class="grid"></div>
+
+  <div class="card fixed">
+    <div class="cluster">OPERATOR STANDARD · VARJE PASS</div>
+    <div class="choice">Hanging Knee Raise</div>
+    <div class="range">3 × 8</div>
+    <div class="meta"><span class="chip">kontrollerat</span><span class="chip">minimal sving</span><span class="chip">ingen failure</span></div>
+  </div>
+
+  <details>
+    <summary>Regler</summary>
+    <ul class="rules">
+      <li>Välj 1 övning ur varje av 7 kluster.</li>
+      <li>Normalpass: 3 varv. Total RPE 4–5.</li>
+      <li>Reduced: 1–2 varv när återhämtningen är gul.</li>
+      <li>Ingen failure. Korta övergångar.</li>
+      <li>Inga gummiband. Tillåtet: golv, pull-up-stång, gymnastikringar.</li>
+      <li>Pull-up/chin-up får köras med assistans/viktreduktion.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Senaste genereringar</summary>
+    <div id="history" class="history"></div>
+  </details>
+
+  <div class="footer">Operator 2.0 · iPhone/PWA build</div>
+</div>
+<script>
+const DATA=[
+{cluster:'PRESS',opts:[
+{family:'Horizontal push',variants:['Standard push-up','Diamond push-up','Ring push-up'],range:'8–15'},
+{family:'Athletic push',variants:['Archer push-up','Side-to-side push-up','Shoulder-tap push-up'],range:'4–10/sida'},
+{family:'Vertical / flow push',variants:['Pike push-up','Dive-bomber push-up','Pike → dive-through'],range:'5–10'}]},
+{cluster:'PULL',opts:[
+{family:'Vertical pronated',variants:['Pull-up','Assisted pull-up'],range:'3–6'},
+{family:'Vertical supinated',variants:['Chin-up','Assisted chin-up'],range:'3–6'},
+{family:'Horizontal',variants:['Ring row · neutral','Ring row · pronated','Ring row · supinated'],range:'6–12'}]},
+{cluster:'LEGS',opts:[
+{family:'Squat',variants:['Air squat','Prisoner squat','Tempo squat'],range:'15–25'},
+{family:'Lunge',variants:['Reverse lunge','Forward lunge','Walking lunge'],range:'6–12/sida'},
+{family:'Lateral',variants:['Cossack squat','Lateral lunge'],range:'5–10/sida'}]},
+{cluster:'POSTERIOR CHAIN',opts:[
+{family:'Hip extension',variants:['Glute bridge','Single-leg bridge'],range:'12–20 / 6–12/sida'},
+{family:'Hamstring',variants:['Ring hamstring curl'],range:'6–12'},
+{family:'Hinge / control',variants:['Single-leg RDL','Single-leg reach'],range:'6–10/sida'}]},
+{cluster:'CORE / BRACING',opts:[
+{family:'McGill',variants:['McGill curl-up'],range:'6–10/sida'},
+{family:'Lateral bracing',variants:['Side plank'],range:'20–40 s/sida'},
+{family:'Hard bracing',variants:['RKC plank'],range:'15–30 s'}]},
+{cluster:'GROUND FLOW',opts:[
+{family:'Beast',variants:['Beast kick-through','Underswitch'],range:'4–8/sida'},
+{family:'Ape',variants:['Traveling Ape','Lateral Ape'],range:'4–8/sida'},
+{family:'Capoeira',variants:['Negativa','Rolê','Negativa → rolê transition'],range:'4–8/sida'}]},
+{cluster:'ENGINE',opts:[
+{family:'Burpee family',variants:['Burpee','Sprawl','Burpee push-up'],range:'5–10'},
+{family:'Explosive legs',variants:['Squat jump','Skater','Split-jump'],range:'6–12'},
+{family:'Athletic conditioning',variants:['Mountain climber','Plank jack','Fast floor switch'],range:'10–20/sida'}]}
+];
+const $=s=>document.querySelector(s); const rnd=a=>a[Math.floor(Math.random()*a.length)];
+let picks=[];
+function render(){
+ const rounds=$('#mode').value;
+ $('#grid').innerHTML=picks.map((p,i)=>`<section class="card"><div class="top"><div class="cluster">${p.cluster}</div><button class="reroll" onclick="reroll(${i})">↻ Reroll</button></div><div class="choice">${p.variant}</div><div class="family">${p.option.family}</div><div class="range">${p.option.range} · ${rounds} varv</div></section>`).join('');
+}
+function makePick(c,optIndex=null){const option=optIndex===null?rnd(c.opts):c.opts[optIndex];return {cluster:c.cluster,option,variant:rnd(option.variants)}}
+function generate(save=true){picks=DATA.map(c=>makePick(c));render();if(save)saveHistory()}
+function generateColumn(){const col=Math.floor(Math.random()*3);picks=DATA.map(c=>makePick(c,col));render();saveHistory()}
+function reroll(i){picks[i]=makePick(DATA[i]);render()}
+function saveHistory(){
+ const stamp=new Date().toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'});
+ const entry={stamp,mode:$('#mode').value,items:picks.map(p=>p.variant)};
+ const h=JSON.parse(localStorage.getItem('operatorHistory')||'[]');h.unshift(entry);localStorage.setItem('operatorHistory',JSON.stringify(h.slice(0,8)));renderHistory();
+}
+function renderHistory(){const h=JSON.parse(localStorage.getItem('operatorHistory')||'[]');$('#history').innerHTML=h.length?h.map(e=>`<div class="history-item"><strong>${e.stamp}</strong> · ${e.mode} varv<br>${e.items.join(' · ')}</div>`).join(''):'Ingen historik ännu.'}
+$('#generateBtn').addEventListener('click',()=>generate(true));$('#columnBtn').addEventListener('click',generateColumn);$('#mode').addEventListener('change',render);
+generate(false);renderHistory();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+</script>
+</body>
+</html>
