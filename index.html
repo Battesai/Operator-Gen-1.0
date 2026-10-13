@@ -64,14 +64,16 @@ const FLOW_PHOTOS={
 child:{file:'childs-pose.jpg',author:'Iveto',license:'CC BY-SA 4.0',page:'https://commons.wikimedia.org/wiki/File:Balasana.JPG'},
 lunge:{file:'lunge.jpg',author:'Robin Lambrecht',license:'CC BY-SA 4.0',page:'https://commons.wikimedia.org/wiki/File:%C4%80%C3%B1janey%C4%81sana_leichtere_Form,_Julija_Zora_Mazover,_2022.jpg'},
 dog:{file:'downward-dog.jpg',author:'Iveto',license:'CC BY 3.0',page:'https://commons.wikimedia.org/wiki/File:Downward-Facing-Dog.JPG'},
-breath:{file:'thunderbolt.jpg',author:'Kennguru',license:'CC BY 3.0',page:'https://commons.wikimedia.org/wiki/File:Virasana_Yoga-Asana_Nina-Mel.jpg'}
+breath:{file:'thunderbolt.jpg',author:'Kennguru',license:'CC BY 3.0',page:'https://commons.wikimedia.org/wiki/File:Virasana_Yoga-Asana_Nina-Mel.jpg'},
+sphinx:{file:'twisted-sphinx.jpg',author:'Christy Collins',license:'CC BY-SA 3.0',page:'https://commons.wikimedia.org/wiki/File:IMG_0549_2_Sphinx.jpg'},
+bridge:{file:'bridge.jpg',author:'Biswarup Ganguly',license:'CC BY 3.0',page:'https://commons.wikimedia.org/wiki/File:Setubandhasana_oblique_view.JPG',source:'https://raw.githubusercontent.com/jreinjr/yoga-pose-photos/main/'}
 };
 function imagePose(key){
 const p=POSES[key];
 const schematic='<svg class="flowart" viewBox="0 0 180 170" role="img" aria-label="Förenklad illustration: '+p[0]+'"><rect width="180" height="170" rx="16" fill="#27362d"/><path d="M13 148 H168" stroke="#526859" stroke-width="2"/><path d="'+p[3]+'" stroke="#d3e8d6" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="135" cy="38" r="12" fill="#496651"/></svg>';
 const photo=FLOW_PHOTOS[key];
 if(!photo)return schematic;
-const src='https://raw.githubusercontent.com/Zerg00s/yoga-app/main/img/poses/'+photo.file;
+const src=(photo.source||'https://raw.githubusercontent.com/Zerg00s/yoga-app/main/img/poses/')+photo.file;
 return '<figure class="flowfigure"><img class="flowphoto" src="'+src+'" loading="eager" alt="Fotografi som visar '+p[0]+'" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div hidden>'+schematic+'</div><figcaption>Foto: '+photo.author+' · '+photo.license+' · <a href="'+photo.page+'" target="_blank" rel="noopener noreferrer">Bildkälla</a></figcaption></figure>';
 }
 function stopFlow(){running=false;if(timer!==null){clearInterval(timer);timer=null}document.getElementById('flowToggle').textContent='Start'}
