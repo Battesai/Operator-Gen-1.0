@@ -1,10 +1,10 @@
 {
-  "name": "Project Operator 2.1",
-  "short_name": "Operator 2.1",
+  "name": "Project Operator 3.0",
+  "short_name": "Operator 3.0",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0b0d0c",
   "theme_color": "#0b0d0c",
-  "description": "Operator 2.1 Daily Armor randomizer."
+  "description": "Operator 3.0 Daily Armor randomizer."
 }
